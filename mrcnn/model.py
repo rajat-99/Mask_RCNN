@@ -2866,6 +2866,6 @@ def denorm_boxes_graph(boxes, shape):
         [..., (y1, x1, y2, x2)] in pixel coordinates
     """
     h, w = tf.split(tf.cast(shape, tf.float32), 2)
-    scale = tf.concat([h, w, h, w], axis=-1) - tf.constant(1.0)
+    scale = tf.concat([h, w, h, w], axis=-1) - tf.constant([1.0])
     shift = tf.constant([0., 0., 1., 1.])
     return tf.cast(tf.round(tf.multiply(boxes, scale) + shift), tf.int32)
