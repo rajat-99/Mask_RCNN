@@ -8,6 +8,7 @@ Written by Waleed Abdulla
 """
 
 import numpy as np
+import tensorflow as tf
 
 
 # Base Configuration Class
@@ -217,11 +218,11 @@ class Config(object):
 
         # Input image size
         if self.IMAGE_RESIZE_MODE == "crop":
-            self.IMAGE_SHAPE = np.array([self.IMAGE_MIN_DIM, self.IMAGE_MIN_DIM,
-                self.IMAGE_CHANNEL_COUNT])
+            self.IMAGE_SHAPE = tf.convert_to_tensor([self.IMAGE_MIN_DIM, self.IMAGE_MIN_DIM,
+                self.IMAGE_CHANNEL_COUNT], dtype=tf.int32)
         else:
-            self.IMAGE_SHAPE = np.array([self.IMAGE_MAX_DIM, self.IMAGE_MAX_DIM,
-                self.IMAGE_CHANNEL_COUNT])
+            self.IMAGE_SHAPE = tf.convert_to_tensor([self.IMAGE_MAX_DIM, self.IMAGE_MAX_DIM,
+                self.IMAGE_CHANNEL_COUNT], dtype=tf.int32)
 
         # Image meta data length
         # See compose_image_meta() for details
