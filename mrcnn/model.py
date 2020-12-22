@@ -1869,8 +1869,10 @@ class MaskRCNN():
                 shape=[None], name="input_gt_class_ids", dtype=tf.int32)
             # 2. GT Boxes in pixels (zero padded)
             # [batch, MAX_GT_INSTANCES, (y1, x1, y2, x2)] in image coordinates
-            input_gt_boxes = KL.Input(
-                shape=[None, 4], name="input_gt_boxes", dtype=tf.float32)
+            # Uncomment for tensorflow v1.x
+            # input_gt_boxes = KL.Input(shape=[None, 4], name="input_gt_boxes", dtype=tf.float32)
+            #Comment out if not using tensorflow v2.x
+            input_gt_boxes = KL.Input(shape=(None, 4, ), name="input_gt_boxes", dtype=tf.float32)
             # Normalize coordinates
             gt_boxes = KL.Lambda(lambda x: norm_boxes_graph(
                 x, K.shape(input_image)[1:3]))(input_gt_boxes)
@@ -2445,10 +2447,7 @@ class MaskRCNN():
         masks = mrcnn_mask[np.arange(N), :, :, class_ids]
 
         # Translate normalized coordinates in the resized image to pixel
-        # coordinates in the original image before resizing
-        window = utils.norm_boxes(window, image_shape[:2])
-        wy1, wx1, wy2, wx2 = window
-        shift = np.array([wy1, wx1, wy1, wx1])
+        # coordinates in the original image before resizinghttps://github.com/rajat-99/Mask_RCNN.git
         wh = wy2 - wy1  # window height
         ww = wx2 - wx1  # window width
         scale = np.array([wh, ww, wh, ww])
