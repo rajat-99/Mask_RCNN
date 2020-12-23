@@ -2602,7 +2602,7 @@ class MaskRCNN():
         # Cache anchors and reuse if image shape is the same
         if not hasattr(self, "_anchor_cache"):
             self._anchor_cache = {}
-        if not tuple(image_shape) in self._anchor_cache:
+        if not tuple(image_shape).ref() in self._anchor_cache:
             # Generate Anchors
             a = utils.generate_pyramid_anchors(
                 self.config.RPN_ANCHOR_SCALES,
@@ -2615,7 +2615,7 @@ class MaskRCNN():
             # TODO: Remove this after the notebook are refactored to not use it
             self.anchors = a
             # Normalize coordinates
-            self._anchor_cache[tuple(image_shape)] = utils.norm_boxes(a, image_shape[:2])
+            self._anchor_cache[tuple(image_shape).ref()] = utils.norm_boxes(a, image_shape[:2])
         return self._anchor_cache[tuple(image_shape)]
 
     def ancestor(self, tensor, name, checked=None):
