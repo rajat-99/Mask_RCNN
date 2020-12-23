@@ -5,6 +5,7 @@ cython
 matplotlib
 scikit-image
 keras
+pycocotools
 opencv-python
 h5py
 imgaug
