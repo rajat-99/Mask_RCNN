@@ -1853,7 +1853,7 @@ class MaskRCNN():
 
         # Inputs
         input_image = KL.Input(
-            shape=(None, None, config.IMAGE_SHAPE[2], ), name="input_image")
+            shape=[None, None, config.IMAGE_SHAPE[2]], name="input_image")
         input_image_meta = KL.Input(shape=[config.IMAGE_META_SIZE],
                                     name="input_image_meta")
         if mode == "training":
@@ -1869,10 +1869,7 @@ class MaskRCNN():
                 shape=[None], name="input_gt_class_ids", dtype=tf.int32)
             # 2. GT Boxes in pixels (zero padded)
             # [batch, MAX_GT_INSTANCES, (y1, x1, y2, x2)] in image coordinates
-            # Uncomment for tensorflow v1.x
-            # input_gt_boxes = KL.Input(shape=[None, 4], name="input_gt_boxes", dtype=tf.float32)
-            #Comment out if not using tensorflow v2.x
-            input_gt_boxes = KL.Input(shape=(None, 4, ), name="input_gt_boxes", dtype=tf.float32)
+            input_gt_boxes = KL.Input(shape=[None, 4], name="input_gt_boxes", dtype=tf.float32)
             # Normalize coordinates
             # gt_boxes = KL.Lambda(lambda x: norm_boxes_graph(
             #     x, K.shape(input_image)[1:3]))(input_gt_boxes)
