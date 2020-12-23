@@ -17,11 +17,11 @@ from collections import OrderedDict
 import multiprocessing
 import numpy as np
 import tensorflow as tf
-from tf import keras
-from tf import keras.backend as K
-from tf import keras.layers as KL
-from tf import keras.engine as KE
-from tf import keras.models as KM
+from tensorflow import keras
+from tensorflow import keras.backend as K
+from tensorflow import keras.layers as KL
+from tensorflow import keras.engine as KE
+from tensorflow import keras.models as KM
 
 from mrcnn import utils
 
