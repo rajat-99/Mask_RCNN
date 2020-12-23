@@ -1876,7 +1876,7 @@ class MaskRCNN():
             # Normalize coordinates
             # gt_boxes = KL.Lambda(lambda x: norm_boxes_graph(
             #     x, K.shape(input_image)[1:3]))(input_gt_boxes)
-            t_boxes = norm_boxes_graph(input_gt_boxes, K.shape(input_image)[1:3])
+            gt_boxes = norm_boxes_graph(input_gt_boxes, K.shape(input_image)[1:3])
             # 3. GT Masks (zero padded)
             # [batch, height, width, MAX_GT_INSTANCES]
             if config.USE_MINI_MASK:
