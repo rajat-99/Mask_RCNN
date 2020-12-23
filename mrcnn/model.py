@@ -20,7 +20,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import backend as K
 from tensorflow.keras import layers as KL
-from tensorflow.keras import engine as KE
+from keras import engine as KE
 from tensorflow.keras import models as KM
 
 from mrcnn import utils
